@@ -1,0 +1,12 @@
+def build(bld):
+    defines = [
+               
+               ]
+
+    includes = ["inc",
+            ]
+    
+    bld.sdkcomponent(
+        name            = "startup_sdk",
+        export_includes = includes,
+        )

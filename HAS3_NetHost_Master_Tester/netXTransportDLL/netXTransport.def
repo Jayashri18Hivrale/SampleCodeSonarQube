@@ -1,0 +1,96 @@
+LIBRARY netXTransport
+
+EXPORTS
+  netXTransportInit             @1
+  netXTransportDeinit           @2
+  netXTransportStart            @3
+  netXTransportStop             @4
+  
+  netXTransportAddConnector     @5
+  netXTransportRemoveConnector  @6
+  
+  netXTransportAddTranslationLayer    @7
+  netXTransportRemoveTranslationLayer @8
+  
+  netXTransportCyclicFunction   @9
+  
+  cifX_Marshaller_Init          @20
+  cifX_Marshaller_DeInit        @21
+  rcXPacket_Init                @22
+  rcXPacket_DeInit              @23
+
+  xDriverOpen                   @30
+  xDriverClose                  @31
+  xDriverGetInformation         @32
+  xDriverEnumBoards             @33
+  xDriverEnumChannels           @34
+  xDriverGetErrorDescription    @35
+  xDriverMemoryPointer          @36
+  xDriverRestartDevice          @37
+
+  xSysdeviceOpen                @50
+  xSysdeviceClose               @51
+  xSysdeviceGetMBXState         @52
+  xSysdevicePutPacket           @53
+  xSysdeviceGetPacket           @54
+  xSysdeviceDownload            @55
+  xSysdeviceInfo                @56
+  xSysdeviceFindFirstFile       @57
+  xSysdeviceFindNextFile        @58
+  xSysdeviceUpload              @59
+  xSysdeviceReset               @60
+
+  xChannelOpen                  @70
+  xChannelClose                 @71
+  xChannelDownload              @72
+  xChannelFindFirstFile         @73
+  xChannelFindNextFile          @74
+  xChannelUpload                @75
+
+  xChannelReset                 @80
+  xChannelInfo                  @81
+  xChannelWatchdog              @82
+  xChannelHostState             @83
+  xChannelConfigLock            @84
+  xChannelBusState              @85
+  xChannelDMAState              @86
+
+  xChannelGetMBXState           @90
+  xChannelPutPacket             @91
+  xChannelGetPacket             @92
+  xChannelGetSendPacket         @93
+
+  xChannelIOInfo                @100
+  xChannelIORead                @101
+  xChannelIOWrite               @102
+  xChannelIOReadSendData        @103
+
+  xChannelControlBlock          @110
+  xChannelCommonStatusBlock     @111
+  xChannelExtendedStatusBlock   @112
+
+  xChannelPLCMemoryPtr          @113
+  xChannelPLCIsReadReady        @114
+  xChannelPLCIsWriteReady       @115
+  xChannelPLCActivateWrite      @116
+  xChannelPLCActivateRead       @117
+
+  xChannelRegisterNotification    @120
+  xChannelUnregisterNotification  @121
+  xChannelSyncState               @122
+
+  nxDrvInit                     @900
+  nxDrvExit                     @901
+  nxDrvGetInformation           @902
+  nxDrvDownload                 @903
+  nxDrvFindDevice               @904
+  nxDrvStart                    @905
+  nxDrvGetConfigInfo            @906
+  nxDrvGetConfig                @907
+  nxDrvSetConfig                @908
+  nxDrvDeleteConfig             @909
+  
+  nxConEnumerate                @920
+  nxConCreateConfigDialog       @921
+  nxConCloseConfigDialog        @922
+

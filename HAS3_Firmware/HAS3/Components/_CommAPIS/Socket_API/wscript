@@ -1,0 +1,13 @@
+def build(bld):
+
+    path = './../../../../External/netx/cifxCommunicationApis/Socket_API/Include/'
+    
+    includes = [
+    path,
+    ]
+    
+    bld.sdkcomponent(
+        name            = "SocketDefinitions_sdk",
+        uses            = "cifXToolkit_sdk",
+        export_includes = includes,
+    )

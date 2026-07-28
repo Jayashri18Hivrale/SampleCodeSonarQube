@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\common\circularBuffer_byte.c" />
+    <ClCompile Include="..\..\..\src\common\crc8bit.c" />
+    <ClCompile Include="..\..\..\src\periphdrivers\d_uart.c" />
+    <ClCompile Include="..\..\..\src\periphdrivers\ddio.c" />
+    <ClCompile Include="..\..\..\src\periphdrivers\dspiMaster.c" />
+  </ItemGroup>
+</Project>

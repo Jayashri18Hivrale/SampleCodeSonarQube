@@ -1,0 +1,13 @@
+def build(bld):
+    
+    includes = ["."]
+    
+    bld.sdkcomponent(
+        name            = "netx_drv_configuration_sdk",
+        export_includes  = includes,
+        )
+    
+    bld.sdkcomponent(
+        name            = "dModules_configuration_sdk",
+        export_includes  = includes,
+        )

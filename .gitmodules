@@ -1,0 +1,10 @@
+[submodule "HAS3_Firmware/External/netx"]
+	path = HAS3_Firmware/External/netx
+	url = ../../lib/netx.git
+[submodule "HAS3_Firmware/External/CMSIS"]
+	path = HAS3_Firmware/External/CMSIS
+	url = ../../lib/dcmsis.git
+[submodule "HAS3_Firmware/External/dModules"]
+	path = HAS3_Firmware/External/dModules
+	url = ../../lib/dematic_modules.git
+

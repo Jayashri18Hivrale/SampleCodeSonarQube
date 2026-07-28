@@ -1,0 +1,93 @@
+import sys
+import re
+import os
+
+top = "."
+out = "build"
+
+# Compare two version strings
+#    Returns -1 if version A is older than version B
+#    Returns  0 if version A and B are equivalent
+#    Returns  1 if version A is newer than version B
+def cmpVersions(versionA, versionB):
+    def normalize(v):
+        # convert version (e.g. "1.10.1.0") string into a tuple. --> [1,10,1,0]
+        # Tuples can be easily compared using cmp
+        return [int(x) for x in re.sub(r'(\.0+)*$','', v).split(".")]
+    return cmp(normalize(versionA), normalize(versionB))
+
+REQUIRED_TOOLCHAINS = ["gccarmemb"]
+HILSCHER_VERSION_COMPATIBILITY = '1.10.1.0'
+
+def get_library_build_paths(base_path):
+    """
+    Search for valid folders containing a `wscript` file.
+    - If the folder `build` exists:
+        - Check for `build/wscript`.
+        - If not found, check for `build/waf/wscript`.
+    - Return a list of folders containing valid `wscript`.
+    """
+    valid_folders = []
+    for root, dirs, files in os.walk(base_path):
+        # Look for the `build` folder
+        if "build" in dirs:
+            build_path = os.path.join(root, "build")
+
+            # Check for `build/wscript`
+            build_wscript = os.path.join(build_path, "wscript")
+            if os.path.isfile(build_wscript):
+                valid_folders.append(build_path)
+                continue  # Move to the next folder after saving `build`
+
+            # Check for `build/waf/wscript`
+            waf_path = os.path.join(build_path, "waf")
+            waf_wscript = os.path.join(waf_path, "wscript")
+            if os.path.isdir(waf_path) and os.path.isfile(waf_wscript):
+                valid_folders.append(waf_path)
+    return valid_folders
+
+def options(ctx):
+    try:
+        ctx.load("hilscher_netx hilscher_firmware hilscher_extras", tooldir="WAF")
+        print("Loaded WAF options from project.")
+    except:
+        ctx.load("hilscher_netx hilscher_firmware hilscher_extras")
+        print("Loaded WAF options from netX Studio.")
+        
+    from hilscher_netx import HILSCHER_VERSION
+    
+    if (cmpVersions(HILSCHER_VERSION, HILSCHER_VERSION_COMPATIBILITY) < 0):
+        sys.stderr.write("Hilscher Waf V" + HILSCHER_VERSION + " is not recommended, please use at least V" + HILSCHER_VERSION_COMPATIBILITY + " or newer!\n")
+        
+    sys.stdout.flush()
+    ctx.autorecurse(mandatory = False)
+
+        # Include options from all external library `build` folders
+  
+    
+def configure(conf):
+    try:
+        conf.load("hilscher_netx hilscher_firmware hilscher_extras", tooldir="WAF")
+        print("Loaded WAF configuration from project.")
+    except:            
+        conf.load("hilscher_netx hilscher_firmware hilscher_extras")
+        print("Loaded WAF configuration from netX Studio.")
+    
+    conf.setenv("")
+    conf.env["UsedToolchain"] = "gccarmemb"
+    conf.env["UsedPlatform"]  = "netx90_app"
+    
+    sys.stdout.flush()
+    conf.autorecurse(mandatory = False)
+    
+    # Include configuration from all external library `build` folders
+ 
+
+def dist(bld):
+    pass
+
+def build(bld):
+    bld.autorecurse() 
+    
+    # Build the external library if available
+ 

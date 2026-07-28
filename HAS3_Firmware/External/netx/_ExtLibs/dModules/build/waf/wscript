@@ -1,0 +1,59 @@
+def options(ctx):
+    pass
+
+def configure(conf):
+    pass
+
+def build(bld):
+    
+    toolchain = bld.env["UsedToolchain"]
+    if not toolchain:
+        bld.fatal('Environment parameter "UsedToolchain" is not available! Make sure to provide the environment parameter "UsedToolchain" in the root wscript file of your project. e.g.: conf.env["UsedToolchain"] = "gccarmemb"')
+    
+    platform  = bld.env["UsedPlatform"]
+    if not platform:
+        bld.fatal('Environment parameter "UsedPlatform" is not available! Make sure to provide the environment parameter "UsedPlatform" in the root wscript file of your project. e.g.: conf.env["UsedPlatform"]  = "netx90"')
+    
+    comp_prefix = bld.get_name_prefix(
+        toolchain = toolchain,
+        platform  = platform)
+    
+# Component netx_drv ------------------------------------------------------------
+    
+    path= './../../'
+  
+    netx_studio_sources = [
+        path + "scr/common/circularBuffer_byte.c",
+        path + "scr/periphdrivers/d_uart.c",
+        path + "scr/periphdrivers/ddio.c",
+        path + "scr/periphdrivers/dspiMaster.c",
+    ]
+
+    includes = [
+        path + "include/common",
+        path + "include/periphdrivers",
+        ]
+
+    bld.stlib( 
+        target          = "dModules",
+        name            = comp_prefix + "dModules",
+        description     = "Dematic modular Library",
+        displaygroup    = "Libraries",
+        platform        = platform,
+        toolchain       = toolchain,
+        use             = [
+                           "dModules_configuration_sdk",
+                          ],
+        source          = netx_studio_sources,
+        includes        = includes,
+        export_includes = includes,
+    )
+    
+    bld.sdkcomponent(
+        name            = "dModules_sdk",
+        use             = [ 
+                          "dModules_configuration_sdk",
+                          ],
+        export_includes = includes,
+    )
+    

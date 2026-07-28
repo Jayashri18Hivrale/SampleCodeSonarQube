@@ -1,0 +1,57 @@
+def build(bld):
+    
+    toolchain = bld.env["UsedToolchain"]
+    if not toolchain:
+        bld.fatal('Environment parameter "UsedToolchain" is not available! Make sure to provide the environment parameter "UsedToolchain" in the root wscript file of your project. e.g.: conf.env["UsedToolchain"] = "gccarmemb"')
+    
+    platform  = bld.env["UsedPlatform"]
+    if not platform:
+        bld.fatal('Environment parameter "UsedPlatform" is not available! Make sure to provide the environment parameter "UsedPlatform" in the root wscript file of your project. e.g.: conf.env["UsedPlatform"]  = "netx90"')
+    
+    comp_prefix = bld.get_name_prefix(
+        toolchain = toolchain,
+        platform  = platform)
+    
+# Component netx_drv ------------------------------------------------------------    
+    path = './../../'
+    
+    netx_studio_sources = [
+        path + "src/nx90Cifx.c", 
+        path + "src/nx90_pns.c", 
+        path + "src/nx90_pns_config.c", 
+        path + "src/nx90_SystemPackets.c", 
+        path + "src/dPacketCommunication.c", 
+        path + "src/dPacketComm_helper.c", 
+        path + "src/nx90_socket.c", 
+    ]
+
+    includes = [
+        path + "inc/",
+        ]
+
+    bld.stlib( 
+        target          = "cifx_modules",
+        name            = comp_prefix + "cifx_dematic",
+        description     = "cifx_modules",
+        displaygroup    = "Libraries",
+        platform        = platform,
+        toolchain       = toolchain,
+        use             = [
+                           comp_prefix + "cifXToolkit",
+                           "PNSDefinitions_sdk",
+                           "SocketDefinitions_sdk",
+                           "nx90_pns_config_sdk",
+                          ],
+        source          = netx_studio_sources,
+        includes        = includes,
+        export_includes = includes,
+    )
+    
+    bld.sdkcomponent(
+        name            = "cifx_modules_sdk",
+        use             = [ 
+                           "cifXToolkit_sdk",
+                           ],
+        export_includes = includes,
+    )
+    

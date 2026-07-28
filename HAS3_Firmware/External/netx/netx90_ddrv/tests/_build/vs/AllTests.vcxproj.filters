@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\test_cases\MyFirstTest.cpp">
+      <Filter>Tests\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\test_cases\AllTests.cpp" />
+    <ClCompile Include="..\..\test_cases\netx90_ddioTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\test_cases\netx90_duartTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mocks\CmsisMockNetx90.cpp">
+      <Filter>Mocks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\_ExtLibs\dModules\scr\periphdrivers\d_uart.c">
+      <Filter>ExtLibs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\_ExtLibs\dModules\scr\periphdrivers\ddio.c">
+      <Filter>ExtLibs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\_ExtLibs\dModules\scr\common\circularBuffer_byte.c">
+      <Filter>ExtLibs</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Mocks">
+      <UniqueIdentifier>{46ec8f43-7dbc-45ad-bf47-c2d29f1b20af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{0373db13-d9e2-4ba9-bef1-dc3e9a23414b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Examples">
+      <UniqueIdentifier>{69610f4b-4ae5-4f0b-87e2-fff237a45ad6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExtLibs">
+      <UniqueIdentifier>{d704cf9f-3794-4852-a5a5-400bbe9129a6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="AllTests.rc" />
+  </ItemGroup>
+</Project>

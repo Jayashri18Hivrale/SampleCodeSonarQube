@@ -1,0 +1,11 @@
+def build(bld):
+
+    includes = [
+    "./../../include",
+    ]
+    
+    bld.sdkcomponent(
+        name            = "EthernetIfDefinitions_sdk",
+        uses            = "cifXToolkit_sdk",
+        export_includes = includes,
+    )

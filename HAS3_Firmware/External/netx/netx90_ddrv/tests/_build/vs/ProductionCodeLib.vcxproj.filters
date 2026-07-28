@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\netx90_ddio.c" />
+    <ClCompile Include="..\..\..\src\netx90_duart.c" />
+    <ClCompile Include="..\..\..\src\next90_dspim.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\netx90_dspim.h" />
+  </ItemGroup>
+</Project>

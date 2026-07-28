@@ -1,0 +1,33 @@
+stages:
+  - setup
+  - unitTest
+
+variables:
+    WORKSPACE_PATH: "$CI_PROJECT_DIR"
+
+
+setup_job:
+  stage: setup
+  image: docker:latest
+  variables:
+    DOCKER_DRIVER: overlay2
+
+  script:
+    - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin "$CI_REGISTRY"
+    - echo "SETUP SUCCESS!!!"
+  only:
+    - main
+    - merge_requests
+
+
+test_job:
+  stage: unitTest
+  image: registry.gitlab.com/dematic/pd-scs/lib/dematic_modules/cpputest-ci:latest
+  script:
+    - echo "Running tests..."
+    - cd "$WORKSPACE_PATH/tests/_build/gnu_make"
+    - make WORKSPACE_PATH="$WORKSPACE_PATH" clean
+    - make WORKSPACE_PATH="$WORKSPACE_PATH"
+  only:
+    - main
+    - merge_requests

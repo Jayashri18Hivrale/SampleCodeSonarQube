@@ -1,0 +1,72 @@
+#############################################################################
+#                                                                           #
+#                       TCP Connector for netX Transport                    #
+#                                                                           #
+#############################################################################
+
+
+General Notes
+-------------
+The versions are given in the form "<major>.<minor>.<build>.<revision>".
+This is in line with the canonical numbering for all Hilscher firmware.
+The dates are given in the international date format (yyyy-mm-dd).
+
+
+
+#############################################################################
+#                                                                           #
+#                            Version History                                #
+#                                                                           #
+#############################################################################
+
+V1.0.4.0 (08-08-11)
+----------------------
+Changes:
+ - None.
+ 
+Add-ons:
+ - None.
+
+Bug fixes:
+ - None.
+
+
+
+V1.0.3.0 (25-11-10)
+----------------------
+Changes:
+ - None.
+ 
+Add-ons:
+ - None.
+
+Bug fixes:
+ - Connector may be allowed to save configuration (access rights to registry), resulting in high CPU load 
+
+
+V1.0.2.0 (26-03-10)
+----------------------
+Changes:
+ - Facelift in configuration dialog
+ 
+Add-ons:
+ - None.
+
+Bug fixes:
+ - Interfaces created via descriptor string may not available immediately
+ - Interfaces created via descriptor string should not be stored in connector configuration 
+
+
+V1.0.1.0 (26-03-10)
+----------------------
+Changes:
+ - Set default scan timeout to 100ms
+ 
+Add-ons:
+ - None.
+
+Bug fixes:
+ - New interfaces created via descriptor string are not signaled to upper layers
+
+ 
+ 

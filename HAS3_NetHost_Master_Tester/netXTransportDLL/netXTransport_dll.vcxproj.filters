@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\netXTransport">
+      <UniqueIdentifier>{17a07a40-a641-4347-8b63-a81e10c7b73c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\OS Specific">
+      <UniqueIdentifier>{edf2c8c4-3db4-4183-88e7-a03966c3bede}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\USER Implemented">
+      <UniqueIdentifier>{d22a2009-8ff4-4ee9-8f95-1e7b6d73ba83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\OS Specific Header">
+      <UniqueIdentifier>{8f1d08a6-c64d-4dae-99c7-96d7a731aa00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\API Header">
+      <UniqueIdentifier>{a970cff3-8864-4f18-93fb-8d850e0fa9be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cifXNXDrv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="netXTransportdll.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Toolkit\Source\cifxapi.c">
+      <Filter>Source Files\netXTransport</Filter>
+    </ClCompile>
+    <ClCompile Include="Toolkit\Source\cifXHelper.c">
+      <Filter>Source Files\netXTransport</Filter>
+    </ClCompile>
+    <ClCompile Include="Toolkit\Source\HilTransport.c">
+      <Filter>Source Files\netXTransport</Filter>
+    </ClCompile>
+    <ClCompile Include="Toolkit\Source\netXTransport.c">
+      <Filter>Source Files\netXTransport</Filter>
+    </ClCompile>
+    <ClCompile Include="Toolkit\Source\TL_Marshaller.c">
+      <Filter>Source Files\netXTransport</Filter>
+    </ClCompile>
+    <ClCompile Include="Toolkit\Source\TL_rcXPacket.c">
+      <Filter>Source Files\netXTransport</Filter>
+    </ClCompile>
+    <ClCompile Include="OSAbstraction\OS_Win32.c">
+      <Filter>Source Files\OS Specific</Filter>
+    </ClCompile>
+    <ClCompile Include="User\User_win32.c">
+      <Filter>Source Files\USER Implemented</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Toolkit\Source\cifXAPI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolkit\Source\ConnectorAPI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolkit\Source\Endianess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolkit\Source\HilTransportLayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolkit\Source\netXTransport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolkit\Source\netXTransport_Errors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolkit\Source\OS_Dependent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolkit\Source\TL_Marshaller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolkit\Source\TL_rcXPacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolkit\Source\TranslationLayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OSAbstraction\OS_Includes.h">
+      <Filter>Header Files\OS Specific Header</Filter>
+    </ClInclude>
+    <ClInclude Include="OSAbstraction\stdint.h">
+      <Filter>Header Files\OS Specific Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolkit\Source\APIHeader\cifXErrors.h">
+      <Filter>Header Files\API Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolkit\Source\APIHeader\cifXUser.h">
+      <Filter>Header Files\API Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolkit\Source\APIHeader\HilFileHeaderV3.h">
+      <Filter>Header Files\API Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolkit\Source\APIHeader\HilTransport.h">
+      <Filter>Header Files\API Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolkit\Source\APIHeader\MarshallerFrame.h">
+      <Filter>Header Files\API Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolkit\Source\APIHeader\netxapi.h">
+      <Filter>Header Files\API Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolkit\Source\APIHeader\rcX_Public.h">
+      <Filter>Header Files\API Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolkit\Source\APIHeader\rcX_User.h">
+      <Filter>Header Files\API Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Toolkit\Source\APIHeader\TLR_Types.h">
+      <Filter>Header Files\API Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="netXTransportdll.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

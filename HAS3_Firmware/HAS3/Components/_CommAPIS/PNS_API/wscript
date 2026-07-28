@@ -1,0 +1,14 @@
+def build(bld):
+
+
+    path = './../../../../External/netx/cifxCommunicationApis/PNS_API/include/'
+    
+    includes = [
+    path,
+    ]
+    
+    bld.sdkcomponent(
+        name            = "PNSDefinitions_sdk",
+        uses            = "cifXToolkit_sdk",
+        export_includes = includes,
+    )

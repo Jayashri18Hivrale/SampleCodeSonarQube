@@ -1,0 +1,53 @@
+def build(bld):
+    
+    toolchain = bld.env["UsedToolchain"]
+    if not toolchain:
+        bld.fatal('Environment parameter "UsedToolchain" is not available! Make sure to provide the environment parameter "UsedToolchain" in the root wscript file of your project. e.g.: conf.env["UsedToolchain"] = "gccarmemb"')
+    
+    platform  = bld.env["UsedPlatform"]
+    if not platform:
+        bld.fatal('Environment parameter "UsedPlatform" is not available! Make sure to provide the environment parameter "UsedPlatform" in the root wscript file of your project. e.g.: conf.env["UsedPlatform"]  = "netx90"')
+    
+    comp_prefix = bld.get_name_prefix(
+        toolchain = toolchain,
+        platform  = platform)
+    
+# Component netx_drv ------------------------------------------------------------
+    
+    path= './../../../External/netx/netx90_ddrv/'
+  
+    netx_studio_sources = [
+        path + "src/netx90_ddio.c",
+        path + "src/netx90_duart.c",
+        path + "src/next90_dspim.c",
+    ]
+
+    includes = [
+        path + "include"
+        ]
+
+    bld.stlib( 
+        target          = "netx90_ddrv",
+        name            = comp_prefix + "netx90_ddrv",
+        description     = "Implementations of peripheral abstract modules for netx90",
+        displaygroup    = "Libraries",
+        platform        = platform,
+        toolchain       = toolchain,
+        use             = [
+                           comp_prefix + "dModules",
+                           "CMSIS_sdk"
+                          ],
+        source          = netx_studio_sources,
+        includes        = includes,
+        export_includes = includes,
+    )
+    
+    bld.sdkcomponent(
+        name            = "netx90_ddrv",
+        use             = [ 
+                           "dModules_sdk",
+                           "CMSIS_sdk"
+                          ],
+        export_includes = includes,
+    )
+    

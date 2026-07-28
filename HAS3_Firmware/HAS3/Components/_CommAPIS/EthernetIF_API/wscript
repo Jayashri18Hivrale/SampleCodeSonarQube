@@ -1,0 +1,13 @@
+def build(bld):
+
+    path = './../../../../External/netx/cifxCommunicationApis/EthernetIF_API/Include/'
+    
+    includes = [
+    path,
+    ]
+    
+    bld.sdkcomponent(
+        name            = "EthernetIfDefinitions_sdk",
+        uses            = "cifXToolkit_sdk",
+        export_includes = includes,
+    )

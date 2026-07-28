@@ -1,0 +1,52 @@
+def build(bld):
+    
+    toolchain = bld.env["UsedToolchain"]
+    if not toolchain:
+        bld.fatal('Environment parameter "UsedToolchain" is not available! Make sure to provide the environment parameter "UsedToolchain" in the root wscript file of your project. e.g.: conf.env["UsedToolchain"] = "gccarmemb"')
+    
+    platform  = bld.env["UsedPlatform"]
+    if not platform:
+        bld.fatal('Environment parameter "UsedPlatform" is not available! Make sure to provide the environment parameter "UsedPlatform" in the root wscript file of your project. e.g.: conf.env["UsedPlatform"]  = "netx90"')
+      
+    comp_prefix = bld.get_name_prefix(
+        toolchain = toolchain,
+        platform  = platform)
+    
+# Component cifXApplicationDemo ------------------------------------------------------------    
+    netx_studio_sources = [
+        "Sources/App_DemoApplication.c", 
+        "Sources/App_DemoApplicationFunctions.c", 
+        "Sources/App_EventHandler.c", 
+        "Sources/App_SystemPackets.c",
+        "Sources/App_TerminalHandler.c", 
+        "Sources/App_PacketCommunication.c", 
+        ]
+
+    includes = [
+        "Includes",
+        ]
+        
+    bld.stlib( 
+        target          = "cifXApplicationDemo",
+        name            = comp_prefix + "cifXApplicationDemo",
+        description     = "cifX Application Demo - protocol independent body",
+        displaygroup    = "Libraries",
+        platform        = platform,
+        toolchain       = toolchain, 
+        use             = [
+                           "Hil_Definition_cifXApi_sdk",
+                           "cifXToolkit_sdk",
+                           "Hil_Definition_netXFirmware_sdk",
+                           "hostabstractionlayer_sdk",
+                           "cifXApplicationDemoConfig_sdk",
+                          ],
+        source          = netx_studio_sources,
+        includes        = includes,
+        export_includes = includes,
+        )
+    
+    bld.sdkcomponent(
+        name            = "cifXApplicationDemo_sdk",
+        export_includes = includes,
+        )
+    

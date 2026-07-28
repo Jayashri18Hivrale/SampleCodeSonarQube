@@ -1,0 +1,127 @@
+import os
+import shutil
+import zipfile
+
+from subprocess import call
+
+def build(bld):
+
+    toolchain = bld.env["UsedToolchain"]
+    if not toolchain:
+        bld.fatal('Environment parameter "UsedToolchain" is not available! Make sure to provide the environment parameter "UsedToolchain" in the root wscript file of your project. e.g.: conf.env["UsedToolchain"] = "gccarmemb"')
+    
+    platform  = bld.env["UsedPlatform"]
+    if not platform:
+        bld.fatal('Environment parameter "UsedPlatform" is not available! Make sure to provide the environment parameter "UsedPlatform" in the root wscript file of your project. e.g.: conf.env["UsedPlatform"]  = "netx90_app"')
+    
+    comp_prefix = bld.get_name_prefix(
+        toolchain = toolchain,
+        platform  = platform)
+    
+    sources = [
+        "Source/handler.c",
+        "Source/netx90_app_header.c",
+        "Source/main.c",
+        "Startup/startup_netx90_app.S",
+        "Startup/system_netx.c",
+    ]
+    
+    includes = [
+        "Include",
+    ]
+    
+    defines = [ 
+        "__NETX90",
+        "_NETX_",
+        ]
+    
+    startup_defines = [
+        "__STARTUP_CLEAR_BSS",
+        "__START = main",
+        "__STACK_SIZE = 0x00002000",
+        "__HEAP_SIZE =  0x00008000",
+       #"__GENERATE_DUMMY",
+       #"SYSTEM_TEMPERATURE_FLOATING_POINT_SUPPORT",
+       #"NVIC_SOFT_VECTOR",
+    ]
+        
+    uses = [
+            "startup_sdk",
+            "CMSIS_sdk",
+            comp_prefix + "libc_support",
+            comp_prefix + "netx_drv",
+            comp_prefix + "netx90_ddrv",
+            comp_prefix + "dModules"
+            ]
+    
+    bld.program(
+        target           = "netx90_app_iflash",
+        name             = comp_prefix + "netx90_app_iflash",
+        platform         = platform,
+        toolchain        = toolchain,
+        use              = uses,
+        source           = sources,
+        includes         = includes,
+        defines          = defines + startup_defines,
+        linkerscript     = ["Startup/netx90_app_iflash.ld"],
+    )
+    
+    bld.generate_netx90_intflash2_image(
+        target           = "netx90_app_iflash.nai",
+        use              = comp_prefix + "netx90_app_iflash"
+    )
+    
+    bld.add_post_fun(create_zip)
+
+def create_zip(bld):
+   # Define the base directory and build folder
+    base_dir = os.getcwd()
+    build_dir = os.path.join(base_dir, "build")
+    var0_dir = os.path.join(build_dir, "VAR0")
+    xip_dir = os.path.join(var0_dir, "XIP")
+    
+    # Ensure the build directory structure exists
+    if not os.path.exists(var0_dir):
+        os.makedirs(var0_dir)
+    if not os.path.exists(xip_dir):
+        os.makedirs(xip_dir)
+    
+    print("Directory structure created inside the build folder.")
+
+    # Paths to source files
+    release_file = os.path.join(base_dir, "build/debug/Targets/Application", "nx90_app_iflash.nai")
+    comm_file = os.path.join(base_dir, "LFW", "PN_X090D000.nxi")
+    
+    # Destination paths
+    app_target = os.path.join(xip_dir, "appcore.nai")
+    comm_target = os.path.join(xip_dir, "commcore.nxi")
+    
+    # Copy and rename files
+    if os.path.exists(release_file):
+        shutil.copyfile(release_file, app_target)
+        print("Copied release file to: " + app_target)
+    else:
+        print("Release file not found: " + release_file)
+    
+    if os.path.exists(comm_file):
+        shutil.copyfile(comm_file, comm_target)
+        print("Copied communication core file to: " + comm_target)
+    else:
+        print("Communication core file not found: " + comm_file)
+    
+    # Create the ZIP file inside the build folder
+    zip_filename = os.path.join(build_dir, "fwupdate.zip")
+    
+    # Use 7-Zip to create the ZIP with required compression settings
+    try:
+        result = call([
+            "7z", "a", "-tzip", "-mm=LZMA", "-mx=5", "-md=64k", "-mfb=32",
+            zip_filename, var0_dir
+        ])
+        if result == 0:
+            print("ZIP file created successfully: " + zip_filename)
+        else:
+            print("Error occurred during ZIP creation with 7-Zip.")
+    except OSError:
+        print("7-Zip not found. Please install 7-Zip and ensure it is in the system's PATH.")   
+    

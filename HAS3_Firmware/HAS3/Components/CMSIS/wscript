@@ -1,0 +1,19 @@
+def build(bld):
+    
+    
+# Component CMSIS ---------------------------------------------------------
+
+    path= './../../../External/CMSIS/'
+ 
+    includes = [
+        path + "Include",
+        path + "Device/Hilscher/netx/Include",
+        ]
+    
+    bld.sdkcomponent(
+        name            = "CMSIS_sdk",
+        uses            = [
+                           "startup_sdk",
+                          ],
+        export_includes = includes,
+    )

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\test_cases\MyFirstTest.cpp">
+      <Filter>Tests\Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\test_cases\AllTests.cpp" />
+    <ClCompile Include="..\..\test_cases\cb_byteTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\test_cases\d_uartTests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\test_cases\ddio_Tests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\helpers\ddio_helper.c">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\helpers\duart_helper.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\test_cases\dSpiM_Tests.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{0373db13-d9e2-4ba9-bef1-dc3e9a23414b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Examples">
+      <UniqueIdentifier>{69610f4b-4ae5-4f0b-87e2-fff237a45ad6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{46ec8f43-7dbc-45ad-bf47-c2d29f1b20af}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="AllTests.rc" />
+  </ItemGroup>
+</Project>

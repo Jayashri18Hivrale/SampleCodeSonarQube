@@ -1,0 +1,6 @@
+[submodule "_ExtLibs/dModules"]
+	path = _ExtLibs/dModules
+	url = ../dematic_modules.git
+[submodule "_ExtLibs/CMSIS"]
+	path = _ExtLibs/CMSIS
+	url = ../dcmsis.git
