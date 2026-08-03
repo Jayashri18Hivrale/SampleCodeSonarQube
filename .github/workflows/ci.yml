@@ -1,0 +1,35 @@
+name: C Project CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify GCC
+        shell: cmd
+        run: |
+          gcc --version
+
+      - name: Verify Make
+        shell: cmd
+        run: |
+          mingw32-make --version
+
+      - name: Build Project
+        shell: cmd
+        run: |
+          mingw32-make
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
