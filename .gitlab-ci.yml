@@ -1,15 +1,30 @@
-stages:
-  - build-firmware
+name: C Project CI
 
-variables:
-    GIT_SUBMODULE_STRATEGY: normal
+on:
+  push:
+    branches:
+      - main
 
-build:
-  stage: build-firmware
-  tags:
-    - has3
-  script:
-    - $env:PATH = "$($env:PYTHON_WAF);$env:PATH"
-    - cd "$CI_PROJECT_DIR\HAS3_Firmware\HAS3"
-    - waf.bat distclean
-    - waf.bat --conditions=debug configure build
+jobs:
+
+  build:
+
+    runs-on: self-hosted
+
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: Check GCC
+        run: gcc --version
+
+      - name: Build Project
+        run: mingw32-make
+          
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
