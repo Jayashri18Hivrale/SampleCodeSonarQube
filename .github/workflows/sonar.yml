@@ -1,0 +1,22 @@
+name: SonarQube Cloud Analysis
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sonar:
+    name: SonarQube Cloud Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: SonarQube Cloud Scan
+        uses: SonarSource/sonarqube-scan-action@v7
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        
